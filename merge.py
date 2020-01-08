@@ -32,7 +32,7 @@ MAX_HEIGHT = 3200
 pdf = FPDF('P','pt','A4')
 
 basename = '*.*'
-imagelist = glob.glob(os.path.join(imgdir,basename))
+imagelist = sorted(glob.glob(os.path.join(imgdir,basename)))
     
 for image in imagelist:
     im = Image.open(image)
