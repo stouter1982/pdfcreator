@@ -40,16 +40,23 @@ if __name__=='__main__':
         im = Image.open(infile)
         imgwidth, imgheight = im.size
         print('Image size is: w %d x h %d ' % (imgwidth, imgheight))
-        height = imgheight
-        width =  imgwidth/2
-        start_num = 0
-        for k,piece in enumerate(crop(im,height,width),start_num):
-            # print k
-            # print piece
-            img=Image.new('L', (width,height), 255)
-            # print img
-            img.paste(piece)
-            path = os.path.join(outdir, "temp%d_1%05d.png" % (filenum,int(k+1)))
-            print(path)
-            img.save(path)
-            #os.rename(path,os.path.join("temp%d.1%05d" % (int(k+1),filenum)))
+        if imgwidth > imgheight:
+            height = imgheight
+            width =  imgwidth/2
+            start_num = 0
+            for k,piece in enumerate(crop(im,height,width),start_num):
+                img=Image.new('L', (width,height), 255)
+                img.paste(piece)
+                path = os.path.join(outdir, "temp%d_1%05d.png" % (filenum,int(k+1)))
+                print(path)
+                img.save(path)
+        else:
+            height = imgheight/2
+            width =  imgwidth
+            start_num = 0
+            for k,piece in enumerate(crop(im,height,width),start_num):
+                img=Image.new('L', (width,height), 255)
+                img.paste(piece)
+                path = os.path.join(outdir, "temp%d_1%05d.png" % (filenum,int(k+1)))
+                print(path)
+                img.save(path)
